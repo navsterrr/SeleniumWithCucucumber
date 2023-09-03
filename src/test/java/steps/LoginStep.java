@@ -19,17 +19,18 @@ import java.util.Map;
  */
 public class LoginStep extends BaseUtil{
 
-    private  BaseUtil base;
+    // private  BaseUtil base;
 
-    public LoginStep(BaseUtil base) {
-        this.base = base;
-    }
+    // public LoginStep(BaseUtil base) {
+    //     // this.base = base;
+    // }
 
     @DataTableType(replaceWithEmptyString = "[blank]")
     public User convert(Map<String, String> entry){
         return new User(
                 entry.get("username"),
-                entry.get("password").concat("$$$$$")
+                entry.get("password")
+                    // .concat("$$$$$")
         );
     }
 
@@ -38,34 +39,36 @@ public class LoginStep extends BaseUtil{
     public void iShouldSeeTheUserformPage() throws Throwable {
         scenarioDef.createNode(new GherkinKeyword("Then"), "I should see the userform page");
 
-        Assert.assertEquals("Its not displayed", base.Driver.findElement(By.id("Initial")).isDisplayed(), true);
+        Assert.assertEquals("Its not displayed", Driver.findElement(By.id("Initial")).isDisplayed(), true);
     }
 
-    @Given("^I navigate to the login page$")
-    public void iNavigateToTheLoginPage() throws Throwable {
-        base.scenarioDef.createNode(new GherkinKeyword("Given"), "I navigate to the login page");
-        System.out.println("Navigate Login Page");
-        base.Driver.navigate().to("http://www.executeautomation.com/demosite/Login.html");
-    }
+    // LoginPage.load() already navigates to Login URL
+    // @Given("^I navigate to the login page$")
+    // public void iNavigateToTheLoginPage() throws Throwable {
+    //     scenarioDef.createNode(new GherkinKeyword("Given"), "I navigate to the login page");
+    //     System.out.println("Navigate Login Page");
+    //     // base.Driver.navigate().to("http://www.executeautomation.com/demosite/Login.html");  //404
+    //     Driver.navigate().to("https://www.selenium.dev/selenium/web/javascriptEnhancedForm.html");
+    // }
 
 
     @And("^I click login button$")
     public void iClickLoginButton() throws Throwable {
-        base.scenarioDef.createNode(new GherkinKeyword("And"), "I click login button");
-        LoginPage page = new LoginPage(base.Driver);
+        scenarioDef.createNode(new GherkinKeyword("And"), "I click login button");
+        LoginPage page = new LoginPage(Driver);
         page.ClickLogin();
     }
 
 
-    @And("^I enter the following for Login$")
+    @Given("^I enter the following for Login$")
     public void iEnterTheFollowingForLogin(List<User> table) throws Throwable {
-        base.scenarioDef.createNode(new GherkinKeyword("And"), "I enter the following for login");
+        scenarioDef.createNode(new GherkinKeyword("And"), "I enter the following for login");
         //Create an ArrayList
         //List<User> users =  new ArrayList<User>();
         //Store all the users
         //List<User> users = table.asList(User.class);
 
-        LoginPage page = new LoginPage(base.Driver);
+        LoginPage page = new LoginPage(Driver).get();   //calls LoginPage.load() & .isLoaded() to navigate to Login Page url 
 
         page.Login(table.get(0).username, table.get(0).password);
 
@@ -75,25 +78,25 @@ public class LoginStep extends BaseUtil{
 
     @And("^I enter ([^\"]*) and ([^\"]*)$")
     public void iEnterUsernameAndPassword(String userName, String password) throws Throwable {
-        base.scenarioDef.createNode(new GherkinKeyword("And"), "I enter username and password");
+        scenarioDef.createNode(new GherkinKeyword("And"), "I enter username and password");
         System.out.println("UserName is : " + userName);
         System.out.println("Password is : " + password);
     }
 
     @Then("^I should see the userform page wrongly$")
     public void iShouldSeeTheUserformPageWrongly() throws Throwable {
-        base.scenarioDef.createNode(new GherkinKeyword("Then"), "I should see  the useform page wrongly");
-        //Assert.assertEquals("Its not displayed", base.Driver.findElement(By.id("sdfgdsfsd")).isDisplayed(), true);
+        scenarioDef.createNode(new GherkinKeyword("Then"), "I should see  the useform page wrongly");
+        //Assert.assertEquals("Its not displayed", Driver.findElement(By.id("sdfgdsfsd")).isDisplayed(), true);
     }
 
 
-    public class User {
-        public String username;
-        public String password;
+    private class User {
+        private String username;
+        private String password;
 
-        public User(String userName, String passWord) {
-            username= userName;
-            password = passWord;
+        public User(String username, String password) {
+            this.username= username;
+            this.password = password;
         }
     }
 

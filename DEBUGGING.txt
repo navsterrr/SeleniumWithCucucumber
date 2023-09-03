@@ -1,0 +1,13 @@
+https://maven.apache.org/surefire/maven-surefire-plugin/examples/debugging.html
+
+mvn -Dmaven.surefire.debug test
+
+The tests will automatically pause and await a remote debugger on port 5005. You can then attach to the running tests using VSCode launch.json config - 
+
+        {
+            "type": "java",
+            "name": "Attach",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": "5005"
+        }

@@ -1,0 +1,50 @@
+// duplicate of ~/Library/Application Support/Code/User/settings.json
+
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "workbench.colorTheme": "Default Dark+",
+    "cucumber.glue": [
+        "src/test/**/*.java",
+        "src/test/java/steps/**/*.java",
+        "src/steps/**/*.ts",
+        "examples/cucumber-js/features/**/*.js",
+        "features/**/*.js",
+        "features/step_definitions/**/*.js",
+        "features/**/*.jsx",
+        "features/**/*.ts",
+        "features/**/*.tsx",
+        "features/**/*.php",
+        "features/**/*.py",
+        "tests/**/*.py",
+        "tests/**/*.rs",
+        "features/**/*.rs",
+        "features/**/*.rb",
+        "*specs*/**/.cs"
+    ],
+    "cucumberautocomplete.gherkinDefinitionPart": "true",
+    "cucumber.features": [
+        "examples/cucumber-js/*/*.feature",
+        "src/test/**/*.feature",
+        "src/features/**/*.feature",
+        "features/**/*.feature",
+        "tests/**/*.feature",
+        "*specs*/**/.feature",
+        "src/test/java/features/**/*.feature"
+    ],
+    "cucumberautocomplete.syncfeatures": "src/test/java/features/*.feature",
+    "cucumberautocomplete.steps": [
+        "examples/cucumber-js/*/*.feature",
+        "examples/cucumber-js/features/*/*.js",
+        "features/**/*.js",
+        "features/**/*.feature",
+        "src/features/**/*.feature",
+        "src/steps/**/*.ts",
+        "src/test/java/features/**/*.feature",
+        "src/test/java/steps/**/*.java"
+    ],
+    "files.autoSave": "afterDelay",
+    "java.compile.nullAnalysis.mode": "disabled",
+    "editor.quickSuggestions": {
+        "strings": "on"
+    }
+}
